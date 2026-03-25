@@ -343,28 +343,6 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
 .edit-field-input:focus{outline:none;border-color:var(--red)}
 
 
-/* ══ الشريط الجانبي ══ */
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1998;backdrop-filter:blur(3px);}
-.sidebar-overlay.show{display:block;}
-.sidebar{position:fixed;right:-280px;top:0;bottom:0;width:280px;background:linear-gradient(180deg,#0D0D1A,#1A1A2E);z-index:1999;transition:right .35s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.6);display:flex;flex-direction:column;}
-.sidebar.open{right:0;}
-.sidebar-head{padding:20px 18px 16px;background:linear-gradient(135deg,#C62828,#E53935);display:flex;align-items:center;gap:12px;}
-.sidebar-av{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;border:2px solid rgba(255,255,255,.5);flex-shrink:0;}
-.sidebar-info{flex:1;min-width:0;}
-.sidebar-name{font-size:15px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sidebar-role{font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;}
-.sidebar-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.sidebar-nav{flex:1;overflow-y:auto;padding:10px 0;}
-.snav-item{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;color:rgba(255,255,255,.7);font-size:14px;font-weight:600;transition:.2s;border-right:3px solid transparent;font-family:inherit;background:none;border-top:none;border-bottom:none;border-left:none;width:100%;text-align:right;}
-.snav-item:hover{background:rgba(255,255,255,.07);color:#fff;border-right-color:rgba(198,40,40,.5);}
-.snav-item.active{background:rgba(198,40,40,.15);color:#fff;border-right-color:#C62828;}
-.snav-item.admin-only{display:none;}
-.snav-ico{font-size:20px;flex-shrink:0;}
-.snav-divider{height:1px;background:rgba(255,255,255,.08);margin:6px 16px;}
-.sidebar-footer{padding:16px;border-top:1px solid rgba(255,255,255,.08);}
-.menu-btn{background:rgba(255,255,255,.1);border:none;width:38px;height:38px;border-radius:10px;cursor:pointer;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;}
-.menu-btn:hover{background:rgba(255,255,255,.2);}
-
 .pending-bar{background:linear-gradient(135deg,#E65100,#FF6F00);color:#fff;padding:14px 20px;
   border-radius:12px;margin-bottom:20px;display:flex;align-items:center;gap:12px;font-weight:700}
 
@@ -382,6 +360,28 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
   .hero h1{font-size:24px}
   .blood-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ══ Sidebar ══ */
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1998;}
+.sb-overlay.show{display:block;}
+.sidebar{position:fixed;right:-280px;top:0;bottom:0;width:280px;background:linear-gradient(180deg,#0D0D1A,#1A1A2E);z-index:1999;transition:right .3s ease;box-shadow:-4px 0 30px rgba(0,0,0,.5);display:flex;flex-direction:column;}
+.sidebar.open{right:0;}
+.sb-head{padding:20px 16px;background:linear-gradient(135deg,#C62828,#E53935);display:flex;align-items:center;gap:12px;}
+.sb-av{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;border:2px solid rgba(255,255,255,.4);flex-shrink:0;}
+.sb-info{flex:1;min-width:0;}
+.sb-name{font-size:14px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sb-role{font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;}
+.sb-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;flex-shrink:0;}
+.sb-nav{flex:1;overflow-y:auto;padding:8px 0;}
+.sb-item{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;color:rgba(255,255,255,.7);font-size:14px;font-weight:600;transition:.2s;border-right:3px solid transparent;background:none;border-top:none;border-bottom:none;border-left:none;width:100%;text-align:right;font-family:inherit;}
+.sb-item:hover{background:rgba(255,255,255,.08);color:#fff;border-right-color:rgba(198,40,40,.5);}
+.sb-item.active{background:rgba(198,40,40,.15);color:#fff;border-right-color:#C62828;}
+.sb-item.admin-only{display:none;}
+.sb-ico{font-size:18px;flex-shrink:0;}
+.sb-div{height:1px;background:rgba(255,255,255,.08);margin:6px 14px;}
+.sb-foot{padding:12px;border-top:1px solid rgba(255,255,255,.08);}
+.menu-btn{background:rgba(255,255,255,.12);border:none;width:36px;height:36px;border-radius:9px;cursor:pointer;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;}
+.menu-btn:hover{background:rgba(255,255,255,.22);}
 </style>
 </head>
 <body>
@@ -468,7 +468,7 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
     <div style="font-size:38px;font-weight:900;margin-bottom:10px;background:linear-gradient(135deg,#FFD700,#FFA500,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">أفنان طه عفين</div>
     <div style="font-size:18px;color:rgba(255,255,255,.7);margin-bottom:6px">مديرة تطبيق Lifeline 🩸</div>
     <div style="font-size:14px;color:rgba(255,255,255,.45);margin-bottom:10px">الأنبار – الرمادي التأميم</div>
-    <div style="font-size:13px;color:rgba(255,215,0,.7);margin-bottom:30px">أهلاً وسهلاً بك في تطبيق التبرع بالدم</div>
+    <div style="font-size:13px;color:rgba(255,215,0,.7);margin-bottom:30px">أهلاً وسهلاً بك في نظام التبرع بالدم</div>
     <button onclick="closeSplash()" style="padding:14px 40px;background:linear-gradient(135deg,#C62828,#E53935);border:none;border-radius:50px;color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 30px rgba(198,40,40,.5)">دخول التطبيق ←</button>
   </div>
 </div>
@@ -480,47 +480,20 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
   <nav>
     <div class="nav-inner">
       <div class="nlogo"><div class="nlicon">🩸</div> Lifeline</div>
+
       <div class="nuser">
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
         <button class="nbell" onclick="toggleNotif()" id="bellBtn">
           🔔<span class="nbadge" id="notifCount" style="display:none">0</span>
         </button>
         <div class="nchip" onclick="showPage('profile',null)">
           <div class="nchip-av" id="navAvatar">م</div>
           <span id="navName">المستخدم</span>
-          <span id="adminCrown" class="admin-crown" style="display:none">👑</span>
+          <span id="adminCrown" class="admin-crown" style="display:none">👑 مديرة</span>
         </div>
-        <button class="menu-btn" onclick="openSidebar()" title="القائمة">☰</button>
       </div>
     </div>
   </nav>
-
-  <!-- الشريط الجانبي -->
-  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-head">
-      <div class="sidebar-av" id="sbAvatar">م</div>
-      <div class="sidebar-info">
-        <div class="sidebar-name" id="sbName">المستخدم</div>
-        <div class="sidebar-role" id="sbRole">مستخدم</div>
-      </div>
-      <button class="sidebar-close" onclick="closeSidebar()">×</button>
-    </div>
-    <div class="sidebar-nav">
-      <button class="snav-item active" id="sn-home" onclick="showPage('home',this);closeSidebar()"><span class="snav-ico">🏠</span> الرئيسية</button>
-      <button class="snav-item" id="sn-search" onclick="showPage('search',this);closeSidebar()"><span class="snav-ico">🔍</span> البحث عن متبرع</button>
-      <button class="snav-item" id="sn-requests" onclick="showPage('requests',this);closeSidebar()"><span class="snav-ico">🩸</span> طلبات الدم</button>
-      <button class="snav-item" id="sn-map" onclick="showPage('map',this);closeSidebar()"><span class="snav-ico">🗺️</span> الخريطة</button>
-      <button class="snav-item" id="sn-donate" onclick="showPage('donate',this);closeSidebar()"><span class="snav-ico">❤️</span> تبرع بالدم</button>
-      <button class="snav-item" id="sn-health" onclick="showPage('health',this);closeSidebar()"><span class="snav-ico">💊</span> صحتي</button>
-      <button class="snav-item" id="sn-chat" onclick="showPage('chat',this);closeSidebar()"><span class="snav-ico">💬</span> الرسائل</button>
-      <div class="snav-divider"></div>
-      <button class="snav-item admin-only" id="sn-admin" onclick="showPage('admin',this);closeSidebar()"><span class="snav-ico">⚙️</span> لوحة الإدارة</button>
-      <button class="snav-item" id="sn-profile" onclick="showPage('profile',this);closeSidebar()"><span class="snav-ico">👤</span> حسابي</button>
-    </div>
-    <div class="sidebar-footer">
-      <button class="snav-item" onclick="doLogout();closeSidebar()" style="color:#EF9A9A;width:100%"><span class="snav-ico">🚪</span> تسجيل الخروج</button>
-    </div>
-  </div>
 
   <!-- لوحة الإشعارات -->
   <div class="notif-panel" id="notifPanel">
@@ -994,83 +967,72 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
   </div>
 </div>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
-// ══════════════════════════════════════════════════════
-//  البيانات الثابتة
-// ══════════════════════════════════════════════════════
-const ADMIN = {email:'afnantaha248@gmail.com', pass:'2003afnf2026', name:'أفنان طه عفين', id:'admin'};
-const ASSISTANT = {email:'tebaalani101@gmail.com', pass:'1234567te', name:'طيبة سفيان أسعد', id:'assistant'};
-
-// ══ Firebase Config ══
 const firebaseConfig = {
   apiKey: "AIzaSyAEDrqfd_nclOwCq2EJBwyeydLvseM-Y10",
   authDomain: "lifeline-1ec6c.firebaseapp.com",
   projectId: "lifeline-1ec6c",
   storageBucket: "lifeline-1ec6c.firebasestorage.app",
   messagingSenderId: "892085234006",
-  appId: "1:892085234006:web:d52fb4960c1442d9b18ef7",
-  measurementId: "G-BN1YZ2VDG7"
+  appId: "1:892085234006:web:d52fb4960c1442d9b18ef7"
 };
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-// تهيئة Firebase
-let db = null;
-async function initFirebase(){
-  try {
-    const {initializeApp} = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
-    const {getFirestore,collection,doc,setDoc,getDoc,getDocs,onSnapshot,addDoc,updateDoc,deleteDoc,query,orderBy} =
-      await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
-    const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-    window._fb = {collection,doc,setDoc,getDoc,getDocs,onSnapshot,addDoc,updateDoc,deleteDoc,query,orderBy};
-    console.log('✅ Firebase متصل');
-    await syncFromFirebase();
-  } catch(e){ console.log('Firebase غير متاح، يعمل محلياً:', e); }
+// حفظ في Firebase
+function fbSave(col, id, data){
+  const clean = JSON.parse(JSON.stringify(data));
+  db.collection(col).doc(String(id)).set(clean).catch(e=>console.log('fbSave err:',e));
 }
 
-async function syncFromFirebase(){
-  if(!db) return;
-  try {
-    const {collection,getDocs,query,orderBy}=window._fb;
-    // مزامنة المستخدمين
-    const usersSnap = await getDocs(collection(db,'users'));
-    usersSnap.forEach(d=>{
-      const data=d.data();
-      if(!users.find(u=>u.id===d.id)){
-        users.push({...data,id:d.id,joined:data.joined?new Date(data.joined):new Date()});
+// تحميل المستخدمين من Firebase عند البداية
+function fbLoadUsers(){
+  db.collection('users').get().then(snap=>{
+    snap.forEach(d=>{
+      const data = d.data();
+      const exists = users.find(u=>u.id===d.id);
+      if(!exists){
+        users.push({...data, id:d.id, joined: data.joined ? new Date(data.joined) : new Date()});
       } else {
-        const idx=users.findIndex(u=>u.id===d.id);
-        if(idx>-1) users[idx]={...users[idx],...data,id:d.id};
-      }
-    });
-    // مزامنة الطلبات
-    const reqSnap = await getDocs(collection(db,'requests'));
-    reqSnap.forEach(d=>{
-      const data=d.data();
-      if(!requests.find(r=>r.id===d.id)){
-        requests.push({...data,id:d.id,date:data.date?new Date(data.date):new Date()});
-      }
-    });
-    // مزامنة الرسائل
-    const msgSnap = await getDocs(collection(db,'pubMsgs'));
-    msgSnap.forEach(d=>{
-      const data=d.data();
-      if(!pubMsgs.find(m=>m.id===d.id)){
-        pubMsgs.push({...data,id:d.id,time:data.time?new Date(data.time):new Date()});
+        // تحديث حقل approved فقط من Firebase
+        exists.approved = data.approved;
       }
     });
     saveData();
     updateStats();
-    console.log('✅ تمت المزامنة مع Firebase');
-  } catch(e){ console.log('خطأ في المزامنة:', e); }
+    updateLoginStats();
+    console.log('✅ Firebase: تم تحميل', snap.size, 'مستخدم');
+  }).catch(e=>console.log('fbLoad err:',e));
 }
 
-async function saveToFirebase(collectionName, id, data){
-  if(!db) return;
-  try {
-    const {doc,setDoc}=window._fb;
-    await setDoc(doc(db, collectionName, String(id)), data);
-  } catch(e){ console.log('خطأ في الحفظ:', e); }
+// مراقبة المستخدمين الجدد في Firebase (للمديرة)
+function fbWatchUsers(){
+  db.collection('users').onSnapshot(snap=>{
+    snap.docChanges().forEach(change=>{
+      const data = change.doc.data();
+      const id = change.doc.id;
+      if(change.type === 'modified'){
+        const u = users.find(x=>x.id===id);
+        if(u){ u.approved = data.approved; saveData(); }
+      }
+      if(change.type === 'added'){
+        const exists = users.find(x=>x.id===id);
+        if(!exists) users.push({...data, id, joined: data.joined?new Date(data.joined):new Date()});
+      }
+    });
+    updateStats();
+  });
 }
+</script>
+<script>
+// ══════════════════════════════════════════════════════
+//  البيانات الثابتة
+// ══════════════════════════════════════════════════════
+const ADMIN = {email:'afnantaha248@gmail.com', pass:'2003afnf2026', name:'أفنان طه عفين', id:'admin'};
+const ASSISTANT = {email:'tebaalani101@gmail.com', pass:'1234567te', name:'طيبة سفيان أسعد', id:'assistant'};
 
 const IRAQ = {
   'بغداد':['الكرخ','الرصافة','الأعظمية','الكاظمية','الكرادة','المنصور','الشعب','الزعفرانية','المدائن','أبو غريب','الطارمية','الصدر','الشعلة','الحرية','الدورة','العامرية','البياع','غزالية','سيدية'],
@@ -1175,7 +1137,6 @@ window.onload=()=>{
   const hasData=loadData();
   if(!hasData) addDemoData();
   updateLoginStats();
-  initFirebase();
 };
 
 function fillAllGovSelects(){
@@ -1264,27 +1225,41 @@ function doLogin(){
   const errEl=document.getElementById('loginErr');
   errEl.style.display='none';
 
-  // تحقق من المديرة
+  // المديرة
   if(email===ADMIN.email && pass===ADMIN.pass){
     currentUser={id:'admin',name:ADMIN.name,email:ADMIN.email,isAdmin:true,isAssistant:false,blood:'O+',gov:'الأنبار',region:'الرمادي التأميم',approved:true,isDonor:false,avail:false,lat:33.4236,lng:43.2984};
     launchApp();return;
   }
 
-  // تحقق من مساعدة المدير
+  // المساعدة
   if(email===ASSISTANT.email && pass===ASSISTANT.pass){
     currentUser={id:'assistant',name:ASSISTANT.name,email:ASSISTANT.email,isAdmin:true,isAssistant:true,blood:'O+',gov:'الأنبار',region:'الرمادي',approved:true,isDonor:false,avail:false,lat:33.4236,lng:43.2984};
     launchApp();return;
   }
 
-  // بحث في المستخدمين
-  let u=users.find(x=>x.email===email);
-  if(!u){errEl.textContent='❌ ليس لديك حساب – يرجى التسجيل أولاً';errEl.style.display='block';return;}
-  if(u.pass && u.pass!==pass){errEl.textContent='❌ كلمة المرور غير صحيحة';errEl.style.display='block';return;}
-  if(!u.approved){
-    errEl.innerHTML='🚫 <b>لم يتم قبول حسابك بعد</b><br><span style="font-size:12px">حسابك قيد المراجعة من قبل المديرة أفنان طه عفين.<br>انتظر الموافقة ثم حاول الدخول مجدداً.</span>';
-    errEl.style.display='block';return;
-  }
-  currentUser=u; launchApp();
+  // أولاً: تحميل من Firebase ثم تسجيل الدخول
+  const tryLogin = () => {
+    let u=users.find(x=>x.email===email);
+    if(!u){errEl.textContent='❌ ليس لديك حساب – يرجى التسجيل أولاً';errEl.style.display='block';return;}
+    if(u.pass && u.pass!==pass){errEl.textContent='❌ كلمة المرور غير صحيحة';errEl.style.display='block';return;}
+    if(!u.approved){
+      errEl.innerHTML='🚫 <b>لم يتم قبول حسابك بعد</b><br><span style="font-size:12px">حسابك قيد المراجعة من قبل المديرة أفنان طه عفين.</span>';
+      errEl.style.display='block';return;
+    }
+    currentUser=u; launchApp();
+  };
+
+  // نحاول نجيب أحدث بيانات من Firebase أولاً
+  db.collection('users').where('email','==',email).get().then(snap=>{
+    snap.forEach(d=>{
+      const data=d.data();
+      const idx=users.findIndex(x=>x.id===d.id);
+      if(idx>-1){ users[idx]={...users[idx],...data,id:d.id}; }
+      else { users.push({...data,id:d.id,joined:data.joined?new Date(data.joined):new Date()}); }
+    });
+    saveData();
+    tryLogin();
+  }).catch(()=>tryLogin());
 }
 
 function doRegister(){
@@ -1294,7 +1269,7 @@ function doRegister(){
   const phone=document.getElementById('rPhone').value.trim();
   const blood=document.getElementById('rBlood').value;
   const gov=document.getElementById('rGov').value;
-  const region=document.getElementById('rReg');
+  const region=document.getElementById('rRegion')||document.getElementById('rReg');
   const reg=region?region.value:'';
   const errEl=document.getElementById('regErr');
   errEl.style.display='none';
@@ -1311,7 +1286,7 @@ function doRegister(){
   };
   users.push(newUser);
   saveData();
-  saveToFirebase('users', newUser.id, {...newUser, joined: newUser.joined.toISOString()});
+  fbSave('users', newUser.id, {...newUser, joined: newUser.joined.toISOString()});
 
   // إشعار للمدير
   addNotification(`👤 مستخدم جديد ينتظر الموافقة: ${name}`, '⏳');
@@ -1334,18 +1309,19 @@ function launchApp(){
   document.getElementById('navAvatar').textContent=currentUser.name[0];
   document.getElementById('navName').textContent=currentUser.name;
   document.getElementById('heroWelcome').textContent=`مرحباً ${currentUser.name} 👋`;
-  document.getElementById('sbAvatar').textContent=currentUser.name[0];
+  document.getElementById('sbAv').textContent=currentUser.name[0];
   document.getElementById('sbName').textContent=currentUser.name;
 
   if(currentUser.isAdmin){
     const crown=document.getElementById('adminCrown');
-    crown.style.display='inline';
-    crown.textContent=currentUser.isAssistant?'🌟 مساعدة':'👑 مديرة';
+    if(crown){ crown.style.display='inline'; crown.textContent=currentUser.isAssistant?'🌟':'👑'; }
     document.getElementById('sbRole').textContent=currentUser.isAssistant?'🌟 مساعدة مديرة التطبيق':'👑 مديرة التطبيق';
     document.querySelectorAll('.admin-only').forEach(el=>el.style.display='flex');
+    fbWatchUsers();
   } else {
     document.getElementById('sbRole').textContent='مستخدم مسجّل';
   }
+  fbLoadUsers();
 
   updateStats();
   renderLatest();
@@ -1373,24 +1349,12 @@ function launchApp(){
 // ══════════════════════════════════════════════════════
 //  الصفحات
 // ══════════════════════════════════════════════════════
-function openSidebar(){
-  document.getElementById('sidebar').classList.add('open');
-  document.getElementById('sidebarOverlay').classList.add('show');
-  document.body.style.overflow='hidden';
-}
-function closeSidebar(){
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebarOverlay').classList.remove('show');
-  document.body.style.overflow='';
-}
-
 function showPage(page,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
-  // تحديث الـ sidebar
-  document.querySelectorAll('.snav-item').forEach(t=>t.classList.remove('active'));
-  const sn=document.getElementById('sn-'+page);
-  if(sn) sn.classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(t=>t.classList.remove('active'));
+  const si=document.getElementById('si-'+page);
+  if(si) si.classList.add('active');
   if(page==='map') setTimeout(()=>{mapObj&&mapObj.invalidateSize();renderMap('all');},150);
   if(page==='profile') renderProfile();
   if(page==='donate') renderDonateStatus();
@@ -2070,7 +2034,7 @@ function approveUser(id){
   if(!u) return;
   u.approved=true;
   saveData();
-  saveToFirebase('users', u.id, {...u, joined: u.joined?.toISOString?.()|| new Date().toISOString()});
+  fbSave('users', u.id, {...u, joined: u.joined?.toISOString?.() || new Date().toISOString()});
   addNotification(`✅ تمت الموافقة على ${u.name}`,'✅');
   renderAdminPage();updateStats();
   showAlert(`✅ تمت الموافقة على ${u.name} – يمكنه الآن تسجيل الدخول`,'s');
@@ -2137,24 +2101,21 @@ function renderProfile(){
   if(!currentUser){el.innerHTML=`<div class="sec" style="text-align:center;padding:50px">يرجى تسجيل الدخول</div>`;return;}
   const u=currentUser;
   const myReqs=requests.filter(r=>r.uid===u.id);
+  const myRat=ratings.filter(r=>r.uid===u.id);
   el.innerHTML=`
     <div style="background:linear-gradient(135deg,var(--redd),var(--red));border-radius:20px;padding:32px;color:#fff;margin-bottom:20px;text-align:center;position:relative">
-      ${u.isAdmin&&!u.isAssistant?'<div style="position:absolute;top:16px;left:16px;background:var(--gold);color:#333;border-radius:8px;padding:4px 12px;font-weight:800;font-size:13px">👑 مديرة التطبيق</div>':''}
-      ${u.isAssistant?'<div style="position:absolute;top:16px;left:16px;background:#4CAF50;color:#fff;border-radius:8px;padding:4px 12px;font-weight:800;font-size:13px">🌟 مساعدة المدير</div>':''}
+      ${u.isAdmin?'<div style="position:absolute;top:16px;left:16px;background:var(--gold);color:#333;border-radius:8px;padding:4px 12px;font-weight:800;font-size:13px">👑 مديرة التطبيق</div>':''}
       <div style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;margin:0 auto 14px;border:3px solid rgba(255,255,255,.4)">${u.name[0]}</div>
       <h2 style="font-size:22px;font-weight:900">${u.name}</h2>
-      <p style="opacity:.75">${u.gov||''} – ${u.region||''}</p>
+      <p style="opacity:.75">${u.gov} – ${u.region||''}</p>
     </div>
     <div class="sec">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <h2>📋 المعلومات الشخصية</h2>
-        <button class="btn btn-blue btn-sm" onclick="openProfileEdit()">✏️ تعديل</button>
-      </div>
+      <h2 style="margin-bottom:16px">📋 المعلومات الشخصية</h2>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         ${infoItem('📧','البريد',u.email)}
         ${infoItem('📞','الهاتف',u.phone||'—')}
-        ${infoItem('🩸','فصيلة الدم','<span style="color:var(--red);font-size:18px;font-weight:900">'+(u.blood||'—')+'</span>')}
-        ${infoItem('🏛️','المحافظة',u.gov||'—')}
+        ${infoItem('🩸','فصيلة الدم','<span style="color:var(--red);font-size:18px;font-weight:900">'+u.blood+'</span>')}
+        ${infoItem('🏛️','المحافظة',u.gov)}
         ${infoItem('📍','المنطقة',u.region||'—')}
         ${infoItem('📊','الطلبات',myReqs.length+' طلب')}
       </div>
@@ -2166,78 +2127,16 @@ function renderProfile(){
           <span style="font-weight:700">الحالة: <span style="color:${u.avail?'var(--green)':'var(--gray)'}">${u.avail?'✅ متاح للتبرع':'⏳ غير متاح'}</span></span>
           <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
             <span style="font-size:13px;color:var(--gray)">تغيير</span>
-            <input type="checkbox" ${u.avail?'checked':''} onchange="toggleAvail(this.checked)" style="width:20px;height:20px;accent-color:var(--red)">
+            <input type="checkbox" ${u.avail?'checked':''} onchange="toggleAvail(this.checked)"
+              style="width:20px;height:20px;accent-color:var(--red)">
           </label>
         </div>`:`
         <p style="color:var(--gray);margin-bottom:14px">لم تسجّل كمتبرع بعد</p>
         <button class="btn btn-red btn-block" onclick="regDonor()">❤️ سجّل كمتبرع الآن</button>`}
     </div>
+    <button class="btn btn-blue btn-block" onclick="openProfileEdit()" style="margin-top:8px">✏️ تعديل معلوماتي</button>
     <button class="btn btn-outline btn-block" onclick="doLogout()" style="margin-top:8px">🚪 تسجيل الخروج</button>
   `;
-}
-
-function openProfileEdit(){
-  // بناء فورم التعديل المضمّن
-  const u=currentUser;
-  const govOptions=Object.keys(IRAQ).map(g=>`<option ${u.gov===g?'selected':''}>${g}</option>`).join('');
-  const regOptions=(IRAQ[u.gov]||[]).map(r=>`<option ${u.region===r?'selected':''}>${r}</option>`).join('');
-  const bloodOptions=['A+','A-','B+','B-','AB+','AB-','O+','O-'].map(b=>`<option ${u.blood===b?'selected':''}>${b}</option>`).join('');
-
-  const el=document.getElementById('profileContent');
-  el.innerHTML=`
-    <div class="sec">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
-        <div style="width:50px;height:50px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff">${u.name[0]}</div>
-        <div>
-          <h2>✏️ تعديل المعلومات الشخصية</h2>
-          <p style="font-size:13px;color:var(--gray);margin-top:3px">يمكنك تعديل بياناتك الشخصية</p>
-        </div>
-      </div>
-      <div class="frow">
-        <div class="fg"><label>👤 الاسم الكامل</label><input id="pe_name" value="${u.name||''}"></div>
-        <div class="fg"><label>📞 الهاتف</label><input id="pe_phone" value="${u.phone||''}"></div>
-      </div>
-      <div class="frow">
-        <div class="fg"><label>🩸 فصيلة الدم</label><select id="pe_blood">${bloodOptions}</select></div>
-        <div class="fg"><label>🏛️ المحافظة</label>
-          <select id="pe_gov" onchange="fillRegions('pe_reg',this.value)">${govOptions}</select>
-        </div>
-      </div>
-      <div class="fg"><label>📍 المنطقة</label>
-        <select id="pe_reg">${regOptions}</select>
-      </div>
-      <div class="frow" style="margin-top:8px">
-        <button class="btn btn-red btn-block" onclick="saveProfileEdit()">💾 حفظ التعديلات</button>
-        <button class="btn btn-outline btn-block" onclick="renderProfile()">إلغاء</button>
-      </div>
-    </div>`;
-}
-
-function saveProfileEdit(){
-  if(!currentUser) return;
-  const name=document.getElementById('pe_name').value.trim();
-  const phone=document.getElementById('pe_phone').value.trim();
-  const blood=document.getElementById('pe_blood').value;
-  const gov=document.getElementById('pe_gov').value;
-  const region=document.getElementById('pe_reg').value;
-  if(!name){showAlert('يرجى إدخال الاسم','e');return;}
-  currentUser.name=name;
-  currentUser.phone=phone;
-  currentUser.blood=blood;
-  currentUser.gov=gov;
-  currentUser.region=region;
-  // تحديث في قائمة المستخدمين
-  const u=users.find(x=>x.id===currentUser.id);
-  if(u) Object.assign(u,{name,phone,blood,gov,region});
-  // تحديث الـ nav
-  document.getElementById('navName').textContent=name;
-  document.getElementById('navAvatar').textContent=name[0];
-  document.getElementById('sbName').textContent=name;
-  document.getElementById('sbAvatar').textContent=name[0];
-  saveData();
-  saveToFirebase('users', currentUser.id, {...currentUser});
-  renderProfile();
-  showAlert('✅ تم حفظ التعديلات بنجاح','s');
 }
 
 function infoItem(ico,lbl,val){
@@ -2265,6 +2164,19 @@ function toggleAvail(v){
   saveData();
   if(mapObj) renderMap('all');
   showAlert(v?'✅ أنت الآن متاح للتبرع':'⏳ تم تعيينك كغير متاح','s');
+}
+
+function openSidebar(){
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sbOverlay').classList.add('show');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sbOverlay').classList.remove('show');
+}
+function navTo(page){
+  closeSidebar();
+  showPage(page, null);
 }
 
 function doLogout(){
@@ -2343,6 +2255,55 @@ function showAlert(msg,type='s'){
 // ══════════════════════════════════════════════════════
 //  مساعدات
 // ══════════════════════════════════════════════════════
+
+function openProfileEdit(){
+  if(!currentUser) return;
+  const u=currentUser;
+  const govOpts=Object.keys(IRAQ).map(g=>`<option ${u.gov===g?'selected':''}>${g}</option>`).join('');
+  const regOpts=(IRAQ[u.gov]||[]).map(r=>`<option ${u.region===r?'selected':''}>${r}</option>`).join('');
+  const bloodOpts=['A+','A-','B+','B-','AB+','AB-','O+','O-'].map(b=>`<option ${u.blood===b?'selected':''}>${b}</option>`).join('');
+  document.getElementById('profileContent').innerHTML=`
+    <div class="sec">
+      <h2 style="margin-bottom:20px">✏️ تعديل معلوماتي</h2>
+      <div class="frow">
+        <div class="fg"><label>👤 الاسم</label><input id="pe_name" value="${u.name||''}"></div>
+        <div class="fg"><label>📞 الهاتف</label><input id="pe_phone" value="${u.phone||''}"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>🩸 فصيلة الدم</label><select id="pe_blood">${bloodOpts}</select></div>
+        <div class="fg"><label>🏛️ المحافظة</label><select id="pe_gov" onchange="fillRegions('pe_reg',this.value)">${govOpts}</select></div>
+      </div>
+      <div class="fg"><label>📍 المنطقة</label><select id="pe_reg">${regOpts}</select></div>
+      <div class="frow" style="margin-top:12px">
+        <button class="btn btn-red" onclick="saveProfileEdit()">💾 حفظ</button>
+        <button class="btn btn-outline" onclick="renderProfile()">إلغاء</button>
+      </div>
+    </div>`;
+}
+
+function saveProfileEdit(){
+  if(!currentUser) return;
+  const name=document.getElementById('pe_name').value.trim();
+  const phone=document.getElementById('pe_phone').value.trim();
+  const blood=document.getElementById('pe_blood').value;
+  const gov=document.getElementById('pe_gov').value;
+  const region=document.getElementById('pe_reg').value;
+  if(!name){showAlert('يرجى إدخال الاسم','e');return;}
+  currentUser.name=name;currentUser.phone=phone;
+  currentUser.blood=blood;currentUser.gov=gov;currentUser.region=region;
+  const u=users.find(x=>x.id===currentUser.id);
+  if(u) Object.assign(u,{name,phone,blood,gov,region});
+  document.getElementById('navName').textContent=name;
+  document.getElementById('navAvatar').textContent=name[0];
+  document.getElementById('sbAv').textContent=name[0];
+  document.getElementById('sbName').textContent=name;
+  saveData();
+  if(currentUser.id!=='admin'&&currentUser.id!=='assistant')
+    fbSave('users',currentUser.id,{...currentUser});
+  renderProfile();
+  showAlert('✅ تم حفظ التعديلات','s');
+}
+
 function fmtTime(d){if(!d) return '';return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`}
 function fmtDate(d){if(!d) return '';return `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`}
 
@@ -2650,29 +2611,15 @@ function saveReqEdit(){
 }
 
 
+</script>
+
 <script>
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('sw.js').catch(e=>console.log(e));
-  });
+  navigator.serviceWorker.register('sw.js').catch(e=>{});
 }
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt',(e)=>{
-  e.preventDefault();deferredPrompt=e;
-  const b=document.getElementById('installBtn');if(b)b.style.display='flex';
-});
-function installApp(){
-  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;});}
-}
-
-// ══ تسجيل Service Worker ══
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg=>console.log('✅ Service Worker مسجّل:',reg))
-      .catch(err=>console.log('❌ خطأ في Service Worker:',err));
-  });
-}
+let _prompt;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();_prompt=e;const b=document.getElementById('installBtn');if(b)b.style.display='flex';});
+function installApp(){if(_prompt){_prompt.prompt();_prompt.userChoice.then(()=>{_prompt=null;});}}
 </script>
 </body>
 </html>
