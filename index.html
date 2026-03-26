@@ -164,7 +164,8 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
 /* ══ إحصائيات ══ */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
 .scard{background:var(--white);border-radius:16px;padding:22px;text-align:center;
-  box-shadow:0 4px 16px rgba(0,0,0,.08);transition:.25s;border-top:4px solid}
+  box-shadow:0 4px 16px rgba(0,0,0,.08);transition:.25s;border-top:4px solid;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .scard:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,.14)}
 .snum{font-size:38px;font-weight:900;line-height:1}
 .slbl{color:var(--gray);font-size:13px;margin-top:6px}
@@ -482,7 +483,6 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
       <div class="nlogo"><div class="nlicon">🩸</div> Lifeline</div>
 
       <div class="nuser">
-        <button class="menu-btn" onclick="openSidebar()">☰</button>
         <button class="nbell" onclick="toggleNotif()" id="bellBtn">
           🔔<span class="nbadge" id="notifCount" style="display:none">0</span>
         </button>
@@ -491,9 +491,66 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
           <span id="navName">المستخدم</span>
           <span id="adminCrown" class="admin-crown" style="display:none">👑 مديرة</span>
         </div>
+        <button class="menu-btn" onclick="openSidebar()" style="margin-right:8px">☰</button>
       </div>
     </div>
   </nav>
+
+  <!-- Overlay -->
+  <div class="sb-overlay" id="sbOverlay" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sb-head">
+      <div class="sb-av" id="sbAv">م</div>
+      <div class="sb-info">
+        <div class="sb-name" id="sbName">المستخدم</div>
+        <div class="sb-role" id="sbRole">مستخدم</div>
+      </div>
+      <button class="sb-close" onclick="closeSidebar()">×</button>
+    </div>
+    <div class="sb-nav">
+      <button class="sb-item active" id="si-home" onclick="navTo('home')">
+        <span class="sb-ico">🏠</span> الرئيسية
+      </button>
+      <button class="sb-item" id="si-search" onclick="navTo('search')">
+        <span class="sb-ico">🔍</span> البحث عن متبرع
+      </button>
+      <button class="sb-item" id="si-requests" onclick="navTo('requests')">
+        <span class="sb-ico">🩸</span> طلبات الدم
+      </button>
+      <button class="sb-item" id="si-map" onclick="navTo('map')">
+        <span class="sb-ico">🗺️</span> الخريطة
+      </button>
+      <button class="sb-item" id="si-donate" onclick="navTo('donate')">
+        <span class="sb-ico">❤️</span> تبرع بالدم
+      </button>
+      <button class="sb-item" id="si-health" onclick="navTo('health')">
+        <span class="sb-ico">💊</span> صحتي
+      </button>
+      <button class="sb-item" id="si-chat" onclick="navTo('chat')">
+        <span class="sb-ico">💬</span> الرسائل
+      </button>
+      <div class="sb-div"></div>
+      <button class="sb-item admin-only" id="si-admin" onclick="navTo('admin')">
+        <span class="sb-ico">⚙️</span> لوحة الإدارة
+      </button>
+      <button class="sb-item" id="si-profile" onclick="navTo('profile')">
+        <span class="sb-ico">👤</span> حسابي
+      </button>
+      <button class="sb-item" id="si-lang" onclick="openLangModal();closeSidebar()">
+        <span class="sb-ico">🌐</span> <span id="langLabel">اللغة</span>
+      </button>
+      <button class="sb-item" id="si-about" onclick="openAboutModal();closeSidebar()">
+        <span class="sb-ico">ℹ️</span> عن التطبيق
+      </button>
+    </div>
+    <div class="sb-foot">
+      <button class="sb-item" onclick="doLogout()" style="color:#EF9A9A;width:100%">
+        <span class="sb-ico">🚪</span> تسجيل الخروج
+      </button>
+    </div>
+  </div>
 
   <!-- لوحة الإشعارات -->
   <div class="notif-panel" id="notifPanel">
@@ -517,10 +574,26 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
       </div>
 
       <div class="stats-grid">
-        <div class="scard" style="border-color:var(--red)"><div class="snum" style="color:var(--red)" id="st1">0</div><div class="slbl">👥 متبرع مسجّل</div></div>
-        <div class="scard" style="border-color:var(--blue)"><div class="snum" style="color:var(--blue)" id="st2">0</div><div class="slbl">🩸 طلب دم</div></div>
-        <div class="scard" style="border-color:var(--green)"><div class="snum" style="color:var(--green)" id="st3">0</div><div class="slbl">❤️ حياة أنقذت</div></div>
-        <div class="scard" style="border-color:var(--gold)"><div class="snum" style="color:var(--gold)" id="st4">0</div><div class="slbl">⭐ تقييم متوسط</div></div>
+        <div class="scard" style="border-color:var(--red)">
+          <div style="font-size:32px;margin-bottom:8px">👥</div>
+          <div class="snum" style="color:var(--red)" id="st1">0</div>
+          <div class="slbl">متبرع مسجّل</div>
+        </div>
+        <div class="scard" style="border-color:var(--blue)">
+          <div style="font-size:32px;margin-bottom:8px">🩸</div>
+          <div class="snum" style="color:var(--blue)" id="st2">0</div>
+          <div class="slbl">طلب دم</div>
+        </div>
+        <div class="scard" style="border-color:var(--green)">
+          <div style="font-size:32px;margin-bottom:8px">❤️</div>
+          <div class="snum" style="color:var(--green)" id="st3">0</div>
+          <div class="slbl">حياة أنقذت</div>
+        </div>
+        <div class="scard" style="border-color:var(--gold)">
+          <div style="font-size:32px;margin-bottom:8px">⭐</div>
+          <div class="snum" style="color:var(--gold)" id="st4">0</div>
+          <div class="slbl">تقييم متوسط</div>
+        </div>
       </div>
 
       <div class="sec">
@@ -967,6 +1040,77 @@ main{max-width:1200px;margin:76px auto 50px;padding:0 20px}
   </div>
 </div>
 
+<!-- ════ مودال اللغة ════ -->
+<div class="modal" id="mLang">
+  <div class="mbox" style="max-width:360px">
+    <div class="mhead"><h3>🌐 اختيار اللغة</h3><button class="mclose" onclick="closeModal('mLang')">×</button></div>
+    <div class="mbody">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button onclick="setLang('ar')" id="lang-ar" class="btn btn-red btn-block" style="font-size:16px;padding:14px;justify-content:flex-start;gap:14px">
+          <span style="font-size:24px">🇮🇶</span> العربية
+          <span id="check-ar" style="margin-right:auto">✅</span>
+        </button>
+        <button onclick="setLang('en')" id="lang-en" class="btn btn-outline btn-block" style="font-size:16px;padding:14px;justify-content:flex-start;gap:14px">
+          <span style="font-size:24px">🇬🇧</span> English
+          <span id="check-en" style="margin-right:auto;display:none">✅</span>
+        </button>
+        <button onclick="setLang('ku')" id="lang-ku" class="btn btn-outline btn-block" style="font-size:16px;padding:14px;justify-content:flex-start;gap:14px">
+          <span style="font-size:24px">🏔️</span> کوردی
+          <span id="check-ku" style="margin-right:auto;display:none">✅</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ مودال عن التطبيق ════ -->
+<div class="modal" id="mAbout">
+  <div class="mbox" style="max-width:420px">
+    <div class="mhead" style="background:linear-gradient(135deg,#1A237E,#283593)">
+      <h3>ℹ️ <span id="aboutTitle">عن التطبيق</span></h3>
+      <button class="mclose" onclick="closeModal('mAbout')">×</button>
+    </div>
+    <div class="mbody" style="text-align:center">
+      <div style="font-size:64px;margin-bottom:12px">🩸</div>
+      <div style="font-size:22px;font-weight:900;color:var(--red);margin-bottom:4px">Lifeline</div>
+      <div style="font-size:14px;color:var(--gray);margin-bottom:20px" id="aboutAppDesc">تطبيق التبرع بالدم في العراق</div>
+
+      <div style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border-radius:14px;padding:20px;margin-bottom:16px;text-align:right">
+        <div style="font-size:13px;font-weight:800;color:#1565C0;margin-bottom:10px">🎓 <span id="aboutUni">جامعة الأنبار</span></div>
+        <div style="font-size:13px;color:#1976D2;line-height:2" id="aboutCollege">
+          كلية علوم الحاسوب وتكنولوجيا المعلومات<br>
+          قسم نظم المعلومات<br>
+          <strong>2026</strong>
+        </div>
+      </div>
+
+      <div style="background:#FFF5F5;border-radius:14px;padding:16px;text-align:right">
+        <div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:10px">👩‍💻 <span id="aboutDevs">إعداد الطالبات</span></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px;background:#fff;border-radius:10px;padding:10px 14px">
+            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#C62828,#E53935);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:16px;flex-shrink:0">أ</div>
+            <div>
+              <div style="font-weight:800;font-size:14px">أفنان طه عفين</div>
+              <div style="font-size:11px;color:var(--gray)">👑 مديرة التطبيق</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#fff;border-radius:10px;padding:10px 14px">
+            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2E7D32,#43A047);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:16px;flex-shrink:0">ط</div>
+            <div>
+              <div style="font-weight:800;font-size:14px">طيبة سفيان أسعد</div>
+              <div style="font-size:11px;color:var(--gray)">🌟 مساعدة مديرة التطبيق</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;font-size:12px;color:var(--gray)">
+        © 2026 Lifeline – <span id="aboutRights">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -1137,6 +1281,7 @@ window.onload=()=>{
   const hasData=loadData();
   if(!hasData) addDemoData();
   updateLoginStats();
+  applyLang(currentLang);
 };
 
 function fillAllGovSelects(){
@@ -2302,6 +2447,144 @@ function saveProfileEdit(){
     fbSave('users',currentUser.id,{...currentUser});
   renderProfile();
   showAlert('✅ تم حفظ التعديلات','s');
+}
+
+// ══════════════════════════════════════════════════════
+//  نظام اللغات
+// ══════════════════════════════════════════════════════
+const LANGS = {
+  ar: {
+    dir:'rtl', lang:'ar',
+    appName:'تطبيق التبرع بالدم في العراق',
+    home:'الرئيسية', search:'البحث', requests:'طلبات الدم',
+    map:'الخريطة', donate:'تبرع بالدم', health:'صحتي',
+    chat:'الرسائل', admin:'لوحة الإدارة', profile:'حسابي',
+    lang:'اللغة', about:'عن التطبيق', logout:'تسجيل الخروج',
+    login:'تسجيل الدخول', register:'حساب جديد',
+    welcome:'مرحباً في Lifeline 🩸',
+    heroSub:'تطبيق التبرع بالدم في العراق – تبرعك ينقذ حياة إنسان',
+    langLabel:'العربية 🇮🇶',
+    aboutTitle:'عن التطبيق',
+    aboutAppDesc:'تطبيق التبرع بالدم في العراق',
+    aboutUni:'جامعة الأنبار',
+    aboutCollege:'كلية علوم الحاسوب وتكنولوجيا المعلومات<br>قسم نظم المعلومات<br><strong>2026</strong>',
+    aboutDevs:'إعداد الطالبات',
+    aboutRights:'جميع الحقوق محفوظة',
+  },
+  en: {
+    dir:'ltr', lang:'en',
+    appName:'Blood Donation App in Iraq',
+    home:'Home', search:'Search', requests:'Blood Requests',
+    map:'Map', donate:'Donate Blood', health:'My Health',
+    chat:'Messages', admin:'Admin Panel', profile:'My Account',
+    lang:'Language', about:'About', logout:'Logout',
+    login:'Login', register:'New Account',
+    welcome:'Welcome to Lifeline 🩸',
+    heroSub:'Blood Donation App in Iraq – Your donation saves lives',
+    langLabel:'English 🇬🇧',
+    aboutTitle:'About the App',
+    aboutAppDesc:'Blood Donation App in Iraq',
+    aboutUni:'University of Anbar',
+    aboutCollege:'College of Computer Science and IT<br>Department of Information Systems<br><strong>2026</strong>',
+    aboutDevs:'Developed by Students',
+    aboutRights:'All Rights Reserved',
+  },
+  ku: {
+    dir:'rtl', lang:'ku',
+    appName:'ئەپی بەخشینی خوێن لە عێراق',
+    home:'سەرەکی', search:'گەڕان', requests:'داواکاری خوێن',
+    map:'نەخشە', donate:'بەخشینی خوێن', health:'تەندرووستیم',
+    chat:'پەیام', admin:'پانێلی بەڕێوەبەری', profile:'هەژمارەکەم',
+    lang:'زمان', about:'دەربارەی', logout:'دەرچوون',
+    login:'چوونەژوورەوە', register:'هەژمارێکی نوێ',
+    welcome:'بەخێربێیت بۆ Lifeline 🩸',
+    heroSub:'ئەپی بەخشینی خوێن لە عێراق – بەخشینت ژیان ڕێزدەکات',
+    langLabel:'کوردی 🏔️',
+    aboutTitle:'دەربارەی ئەپەکە',
+    aboutAppDesc:'ئەپی بەخشینی خوێن لە عێراق',
+    aboutUni:'زانکۆی ئەنبار',
+    aboutCollege:'کۆلێژی زانستی کۆمپیوتەر و تەکنەلۆژیای زانیاری<br>بەشی سیستەمی زانیاری<br><strong>2026</strong>',
+    aboutDevs:'ئامادەکراوە لەلایەن',
+    aboutRights:'هەموو مافەکان پارێزراون',
+  }
+};
+
+let currentLang = localStorage.getItem('ll_lang') || 'ar';
+
+function applyLang(code){
+  const L = LANGS[code] || LANGS.ar;
+  currentLang = code;
+  localStorage.setItem('ll_lang', code);
+
+  // اتجاه الصفحة
+  document.documentElement.dir = L.dir;
+  document.documentElement.lang = L.lang;
+
+  // تحديث الـ sidebar
+  const map = {
+    'si-home': L.home, 'si-search': L.search, 'si-requests': L.requests,
+    'si-map': L.map, 'si-donate': L.donate, 'si-health': L.health,
+    'si-chat': L.chat, 'si-admin': L.admin, 'si-profile': L.profile,
+    'si-lang': L.lang, 'si-about': L.about
+  };
+  Object.keys(map).forEach(id=>{
+    const el = document.getElementById(id);
+    if(el){
+      const ico = el.querySelector('.sb-ico');
+      const icoText = ico ? ico.outerHTML : '';
+      el.innerHTML = icoText + ' ' + map[id];
+      if(ico) el.prepend(ico);
+    }
+  });
+
+  // تحديث عنوان اللغة في الـ sidebar
+  const langLabel = document.getElementById('langLabel');
+  if(langLabel) langLabel.textContent = L.lang;
+
+  // تحديث نصوص أخرى
+  const heroSub = document.querySelector('.hero p');
+  if(heroSub) heroSub.textContent = L.heroSub;
+
+  // تحديث علامات الاختيار في مودال اللغة
+  ['ar','en','ku'].forEach(c=>{
+    const check = document.getElementById('check-'+c);
+    const btn = document.getElementById('lang-'+c);
+    if(check) check.style.display = c===code ? 'inline' : 'none';
+    if(btn){
+      btn.className = c===code ?
+        'btn btn-red btn-block' :
+        'btn btn-outline btn-block';
+      btn.style = 'font-size:16px;padding:14px;justify-content:flex-start;gap:14px';
+    }
+  });
+}
+
+function setLang(code){
+  applyLang(code);
+  closeModal('mLang');
+  showAlert(LANGS[code]?.langLabel || code, 's');
+}
+
+function openLangModal(){
+  // تحديث حالة الأزرار
+  ['ar','en','ku'].forEach(c=>{
+    const check = document.getElementById('check-'+c);
+    const btn = document.getElementById('lang-'+c);
+    if(check) check.style.display = c===currentLang ? 'inline' : 'none';
+    if(btn) btn.className = c===currentLang ? 'btn btn-red btn-block' : 'btn btn-outline btn-block';
+  });
+  openModal('mLang');
+}
+
+function openAboutModal(){
+  const L = LANGS[currentLang] || LANGS.ar;
+  const t = document.getElementById('aboutTitle'); if(t) t.textContent = L.aboutTitle;
+  const d = document.getElementById('aboutAppDesc'); if(d) d.textContent = L.aboutAppDesc;
+  const u = document.getElementById('aboutUni'); if(u) u.textContent = L.aboutUni;
+  const c = document.getElementById('aboutCollege'); if(c) c.innerHTML = L.aboutCollege;
+  const dv = document.getElementById('aboutDevs'); if(dv) dv.textContent = L.aboutDevs;
+  const r = document.getElementById('aboutRights'); if(r) r.textContent = L.aboutRights;
+  openModal('mAbout');
 }
 
 function fmtTime(d){if(!d) return '';return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`}
