@@ -1803,7 +1803,10 @@ function renderReqList(){
       <div style="display:flex;flex-direction:column;gap:6px">
         <button class="btn btn-blue btn-sm" onclick="goToMap(${r.lat},${r.lng})">🗺️</button>
         ${currentUser?.isAdmin&&r.status==='Pending'?`
-          <button class="btn btn-green btn-sm" onclick="completeReq('${r.id}')">✅</button>`:''
+          <button class="btn btn-green btn-sm" onclick="completeReq('${r.id}')">✅ إتمام</button>`:''
+        }
+        ${currentUser?.isAdmin?`
+          <button class="btn btn-danger btn-sm" onclick="deleteReq('${r.id}')">🗑️ حذف</button>`:''
         }
         ${r.status==='Completed'&&currentUser?.id===r.uid?`
           <button class="btn btn-sm" style="background:var(--gold);color:#333" onclick="openModal('mRate')">⭐</button>`:''
@@ -1816,6 +1819,22 @@ function renderReqList(){
 function completeReq(id){
   const r=requests.find(x=>x.id===id);
   if(r){r.status='Completed';saveData();updateStats();renderReqList();renderAdminPage();showAlert('✅ تم تأكيد إتمام الطلب','s');}
+}
+
+function deleteReq(id){
+  if(!currentUser?.isAdmin){showAlert('❌ هذه الصلاحية للمديرة فقط','e');return;}
+  if(!confirm('هل تريدين حذف هذا الطلب نهائياً؟')) return;
+  const i=requests.findIndex(x=>x.id===id);
+  if(i>-1){
+    requests.splice(i,1);
+    saveData();
+    // حذف من Firebase
+    try{ db.collection('requests').doc(String(id)).delete(); }catch(e){}
+    updateStats();
+    renderReqList();
+    renderAdminPage();
+    showAlert('🗑️ تم حذف الطلب بنجاح','s');
+  }
 }
 
 function renderLatest(){
@@ -2233,7 +2252,7 @@ function renderAllReqs(){
       <td>${r.hosp}</td><td>${r.gov}</td>
       <td><span style="color:${c};font-weight:700">${urgAr(r.urg)}</span></td>
       <td>${r.status==='Completed'?'<span style="color:var(--green);font-weight:700">✅ مكتمل</span>':'<span style="color:var(--orange);font-weight:700">⏳ انتظار</span>'}</td>
-      <td>${r.status==='Pending'?`<button class="btn btn-green btn-sm" onclick="completeReq('${r.id}')">✅ إتمام</button>`:''} <button class="btn btn-blue btn-sm" onclick="openEditReq('${r.id}')">✏️</button></td>
+      <td>${r.status==='Pending'?`<button class="btn btn-green btn-sm" onclick="completeReq('${r.id}')">✅ إتمام</button> `:''}<button class="btn btn-blue btn-sm" onclick="openEditReq('${r.id}')">✏️</button> <button class="btn btn-danger btn-sm" onclick="deleteReq('${r.id}')">🗑️</button></td>
     </tr>`;
   }).join('')+'</tbody>';
 }
@@ -2520,21 +2539,25 @@ function applyLang(code){
   document.documentElement.dir = L.dir;
   document.documentElement.lang = L.lang;
 
-  // تحديث الـ sidebar
-  const map = {
-    'si-home': L.home, 'si-search': L.search, 'si-requests': L.requests,
-    'si-map': L.map, 'si-donate': L.donate, 'si-health': L.health,
-    'si-chat': L.chat, 'si-admin': L.admin, 'si-profile': L.profile,
-    'si-lang': L.lang, 'si-about': L.about
+  // تحديث الـ sidebar بشكل صحيح مع الأيقونات
+  const sidebarMap = {
+    'si-home':    {ico:'🏠', txt:L.home},
+    'si-search':  {ico:'🔍', txt:L.search},
+    'si-requests':{ico:'🩸', txt:L.requests},
+    'si-map':     {ico:'🗺️', txt:L.map},
+    'si-donate':  {ico:'❤️', txt:L.donate},
+    'si-health':  {ico:'💊', txt:L.health},
+    'si-chat':    {ico:'💬', txt:L.chat},
+    'si-admin':   {ico:'⚙️', txt:L.admin},
+    'si-profile': {ico:'👤', txt:L.profile},
+    'si-lang':    {ico:'🌐', txt:L.lang},
+    'si-about':   {ico:'ℹ️', txt:L.about},
   };
-  Object.keys(map).forEach(id=>{
-    const el = document.getElementById(id);
-    if(el){
-      const ico = el.querySelector('.sb-ico');
-      const icoText = ico ? ico.outerHTML : '';
-      el.innerHTML = icoText + ' ' + map[id];
-      if(ico) el.prepend(ico);
-    }
+  Object.keys(sidebarMap).forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    const {ico,txt}=sidebarMap[id];
+    el.innerHTML=`<span class="sb-ico">${ico}</span> ${txt}`;
   });
 
   // تحديث عنوان اللغة في الـ sidebar
